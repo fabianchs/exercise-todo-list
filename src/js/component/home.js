@@ -32,10 +32,14 @@ export function Home() {
 			<div className="bg-warning m-1" id="anchogeneral">
 				<ul className="list-group ">
 					<li className="list-group-item list-group-item-secondary align-items-center">
-						<button type="button" className="btn btn-danger m-2">
-							<i className="far fa-trash-alt"></i>
-						</button>
-						<h5>Aquí aparecerán tus tareas</h5>
+						<div>
+							<button
+								type="button"
+								className="btn btn-danger m-2">
+								<i className="far fa-trash-alt"></i>
+							</button>
+							<p>Aquí aparecerán tus tareas</p>
+						</div>
 					</li>
 				</ul>
 			</div>
