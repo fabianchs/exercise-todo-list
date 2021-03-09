@@ -2,23 +2,26 @@ import React, { useState } from "react";
 
 //create your first component
 //hooks son funciones que se extraen
+
 export function Home() {
 	const [tarea, setTarea] = useState("");
 	const [tareas, setTareas] = useState([]);
 
 	function handleChange(event) {
-		console.log(event.target.value);
+		//console.log(event.target.value);
 		setTarea(event.target.value);
-		console.log(tarea);
+		//console.log(tarea);
 	}
 	function clic() {
 		alert(tarea);
 		//setTareas(tareas.push(tarea));
-		const tareasx = tareas.push(tarea);
-		setTareas(tareasx);
+
+		setTareas(tareas.concat(tarea));
 
 		console.log(tareas);
 	}
+
+	const taskItems = tareas.map((item, index) => <li key={index}>{item}</li>);
 
 	return (
 		<div className="mx-auto" id="anchogeneral">
@@ -55,7 +58,7 @@ export function Home() {
 						</button>
 					</div>
 					<div className="col-10 d-flex align-items-center">
-						<p>{tarea}</p>
+						{taskItems}
 					</div>
 				</div>
 			</div>
