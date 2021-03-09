@@ -1,52 +1,30 @@
-import React from "react";
-
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+import React, { useState } from "react";
 
 //create your first component
-
-let lista = [
-	<div
-		className="m-1 border  border-rounded-3 align-items-center"
-		id="anchogeneral">
-		<div className="row">
-			<div className="col-2 d-flex align-items-center">
-				<button type="button" className="btn btn-danger m-2">
-					<i className="far fa-trash-alt"></i>
-				</button>
-			</div>
-			<div className="col-10 d-flex align-items-center">
-				<p>Aqui apareceran tus tareas</p>
-			</div>
-		</div>
-	</div>,
-	<div
-		className="m-1 border  border-rounded-3 align-items-center"
-		id="anchogeneral">
-		<div className="row">
-			<div className="col-2 d-flex align-items-center">
-				<button type="button" className="btn btn-danger m-2">
-					<i className="far fa-trash-alt"></i>
-				</button>
-			</div>
-			<div className="col-10 d-flex align-items-center">
-				<p>Aqui apareceran tus tareas</p>
-			</div>
-		</div>
-	</div>
-];
-
-function Works() {
-	return lista;
-}
-
+//hooks son funciones que se extraen
 export function Home() {
+	const [tarea, setTarea] = useState("");
+	const [tareas, setTareas] = useState([]);
+
+	function handleChange(event) {
+		console.log(event.target.value);
+		setTarea(event.target.value);
+		console.log(tarea);
+	}
+	function clic() {
+		alert(tarea);
+		//setTareas(tareas.push(tarea));
+		const tareasx = tareas.push(tarea);
+		setTareas(tareasx);
+
+		console.log(tareas);
+	}
+
 	return (
 		<div className="mx-auto" id="anchogeneral">
 			<div className=" d-flex justify-content-center" id="anchogeneral">
 				<h1>TODO LIST</h1>
 			</div>
-
 			<div>
 				<div className="m-1" id="anchogeneral">
 					<input
@@ -54,18 +32,19 @@ export function Home() {
 						className="form-control"
 						placeholder="Inserta tu tarea"
 						aria-label="Username"
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="m-1" id="anchogeneral">
 					<button
 						type="button"
 						className="btn btn-primary "
+						onClick={clic}
 						id="anchogeneral">
 						Agregar
 					</button>
 				</div>
 			</div>
-
 			<div
 				className="m-1 border  border-rounded-3 align-items-center"
 				id="anchogeneral">
@@ -76,11 +55,10 @@ export function Home() {
 						</button>
 					</div>
 					<div className="col-10 d-flex align-items-center">
-						<p>Aqui apareceran tus tareas</p>
+						<p>{tarea}</p>
 					</div>
 				</div>
 			</div>
-			<div>{Home()}</div>
 		</div>
 	);
 }
