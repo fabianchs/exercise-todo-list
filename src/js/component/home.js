@@ -6,27 +6,48 @@ import React, { useState } from "react";
 export function Home() {
 	const [tarea, setTarea] = useState("");
 	const [tareas, setTareas] = useState([]);
+	const [indice, setIndice] = useState("");
 
 	function handleChange(event) {
-		//console.log(event.target.value);
 		setTarea(event.target.value);
-		//console.log(tarea);
 	}
 	function clic() {
-		alert(tarea);
-		//setTareas(tareas.push(tarea));
-
-		setTareas(tareas.concat(tarea));
-
-		console.log(tareas);
+		if (tarea != "") {
+			if (tareas.lenght == 0) {
+				setTareas(tareas.push(tarea));
+			} else {
+				setTareas(tareas.concat(tarea));
+			}
+		}
 	}
 
-	const taskItems = tareas.map((item, index) => <li key={index}>{item}</li>);
+	function borrar(index) {
+		//tareas.splice(index);
+		setIndice(tareas.splice(index, 1));
+	}
+
+	const taskItems = tareas.map((item, index) => (
+		<div key={index} className="row">
+			<div className="col-2 d-flex align-items-center">
+				<button
+					onClick={() => {
+						borrar(index);
+					}}
+					type="button"
+					className="btn btn-danger m-2">
+					<i className="far fa-trash-alt"></i>
+				</button>
+			</div>
+			<div className="col-10 d-flex align-items-center" id="text">
+				{item}
+			</div>
+		</div>
+	));
 
 	return (
 		<div className="mx-auto" id="anchogeneral">
 			<div className=" d-flex justify-content-center" id="anchogeneral">
-				<h1>TODO LIST</h1>
+				<h1 id="title">TODO LIST</h1>
 			</div>
 			<div>
 				<div className="m-1" id="anchogeneral">
@@ -51,16 +72,7 @@ export function Home() {
 			<div
 				className="m-1 border  border-rounded-3 align-items-center"
 				id="anchogeneral">
-				<div className="row">
-					<div className="col-2 d-flex align-items-center">
-						<button type="button" className="btn btn-danger m-2">
-							<i className="far fa-trash-alt"></i>
-						</button>
-					</div>
-					<div className="col-10 d-flex align-items-center">
-						{taskItems}
-					</div>
-				</div>
+				{taskItems}
 			</div>
 		</div>
 	);
