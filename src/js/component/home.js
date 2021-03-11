@@ -3,6 +3,8 @@ import React, { useState } from "react";
 //create your first component
 //hooks son funciones que se extraen
 
+let contador = 0;
+let text_tarea = "tareas";
 export function Home() {
 	const [tarea, setTarea] = useState("");
 	const [tareas, setTareas] = useState([]);
@@ -15,8 +17,10 @@ export function Home() {
 		if (tarea != "") {
 			if (tareas.lenght == 0) {
 				setTareas(tareas.push(tarea));
+				contador++;
 			} else {
 				setTareas(tareas.concat(tarea));
+				contador++;
 			}
 		}
 	}
@@ -24,6 +28,13 @@ export function Home() {
 	function borrar(index) {
 		//tareas.splice(index);
 		setIndice(tareas.splice(index, 1));
+		contador--;
+	}
+
+	if (contador == 1) {
+		text_tarea = "tarea";
+	} else {
+		text_tarea = "tareas";
 	}
 
 	const taskItems = tareas.map((item, index) => (
@@ -68,6 +79,9 @@ export function Home() {
 						Agregar
 					</button>
 				</div>
+			</div>
+			<div className="m-1 align-items-center" id="anchogeneral">
+				Hay {contador} {text_tarea} por realizar.
 			</div>
 			<div
 				className="m-1 border  border-rounded-3 align-items-center"
